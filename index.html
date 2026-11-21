@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커넥터 링</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f6fa;color:#202b3c;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif}
+header{background:#fff;padding:20px 18px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e8edf2;position:sticky;top:0;z-index:5}
+.logo{font-size:23px;font-weight:850;color:#244c79}
+.logo small{display:block;font-size:11px;color:#91a1b4;letter-spacing:2px}
+button{border:0;cursor:pointer;font:inherit}
+.iconbtn{background:#f1f5fa;border-radius:14px;padding:10px 13px;font-size:19px}
+main{max-width:650px;margin:auto;padding:18px 15px 100px}
+.demo{background:#eaf3ff;color:#376a9f;padding:10px 13px;border-radius:12px;font-size:12px;margin-bottom:16px}
+h2{font-size:21px;margin:8px 0 15px}
+.card{background:white;border-radius:20px;padding:18px;margin-bottom:15px;box-shadow:0 3px 14px #243b5309}
+.status{display:flex;justify-content:space-between;align-items:center}
+.pill{background:#e5f7ee;color:#279568;border-radius:20px;padding:7px 12px;font-size:12px;font-weight:bold}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+.metric{background:#f5f8fc;padding:15px;border-radius:15px}
+.metric span{display:block;color:#8493a5;font-size:12px;margin-bottom:8px}
+.metric b{font-size:23px;color:#315f91}
+.metric small{font-size:12px;color:#8292a5}
+.camera{background:#17283b;color:white;text-align:center;border-radius:17px;padding:28px 15px}
+.camera .symbol{font-size:42px}
+.camera p{color:#c6d4e3;font-size:13px;line-height:1.6}
+.primary{background:#376fa9;color:white;border-radius:13px;padding:13px 17px;font-weight:bold;width:100%;margin-top:12px}
+.secondary{background:#edf3f9;color:#37638e;border-radius:12px;padding:11px 14px;font-weight:bold}
+.row{display:flex;gap:9px;align-items:center}
+.row>*{flex:1}
+.hidden{display:none!important}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5eaf0;display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:10}
+nav button{background:none;color:#8a98a9;font-size:11px;font-weight:bold;min-width:55px}
+nav button span{display:block;font-size:22px;margin-bottom:4px}
+nav button.active{color:#3978b6}
+.post{border-bottom:1px solid #edf0f4;padding:12px 0}
+.post:last-child{border:0}
+.muted{color:#8795a5;font-size:13px;line-height:1.6}
+input,textarea{font:inherit;width:100%;border:1px solid #e1e8ef;border-radius:12px;padding:12px;background:#fbfcfe;margin-top:8px}
+textarea{min-height:90px;resize:vertical}
+footer{text-align:center;color:#9aa7b5;font-size:11px;padding:10px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">C CONNECTOR RING<small>CARE & CONNECTION</small></div>
+ <div class="row" style="flex:0">
+  <button class="iconbtn" onclick="alert('새 알림이 없습니다. (시연용)')">🔔</button>
+  <button class="iconbtn" onclick="alert('설정 화면은 시연용입니다.')">⚙️</button>
+ </div>
+</header>
+
+<main>
+<div class="demo">ⓘ 시연용 화면입니다. 표시된 아기 상태와 수치는 모두 가상 데이터이며 실제 병원 정보와 연결되어 있지 않습니다.</div>
+
+<section id="home">
+ <h2>우리 아기 상태</h2>
+ <div class="card">
+  <div class="status">
+   <div><b>아기 상태</b><div class="muted">가상 상태 정보</div></div>
+   <span class="pill">● 정상 모드</span>
+  </div>
+  <div class="metrics">
+   <div class="metric"><span>🌡️ 체온</span><b>36.7°C</b><small> 시연용 수치</small></div>
+   <div class="metric"><span>💓 심박수</span><b>126 bpm</b><small> 시연용 수치</small></div>
+  </div>
+  <p class="muted">팔찌 연결 상태: <b style="color:#279568">연결됨 (시연)</b></p>
+ </div>
+
+ <h2>아기 영상 확인</h2>
+ <div class="card">
+  <div class="camera">
+   <div class="symbol">📹</div>
+   <b>아기 영상 모니터링</b>
+   <p>병원과의 실제 카메라 연동은 지원하지 않습니다.<br>시연을 위해 동영상을 선택하면 이 화면에서 미리 볼 수 있습니다.</p>
+  </div>
+  <input type="file" id="videoFile" accept="video/*">
+  <video id="preview" class="hidden" controls style="width:100%;margin-top:12px;border-radius:14px"></video>
+  <button class="primary" onclick="document.getElementById('videoFile').click()">📷 동영상 선택하기</button>
+  <p class="muted">선택한 영상은 이 브라우저에서 미리 보기만 가능하며 서버로 전송되지 않습니다.</p>
+ </div>
+
+ <h2>커넥터 링 주요 기능</h2>
+ <div class="card">
+  <div class="row">
+   <div>💌<br><b>아기 소식</b></div>
+   <div>🎙️<br><b>목소리 전달</b></div>
+   <div>💬<br><b>부모 커뮤니티</b></div>
+  </div>
+  <p class="muted">병원과 부모 사이의 소통을 돕고, 아기와 가족의 거리감을 줄이는 서비스입니다.</p>
+ </div>
+</section>
+
+<section id="news" class="hidden">
+ <h2>아기 소식</h2>
+ <div class="card">
+  <span class="pill">새 소식 · 시연용</span>
+  <h3>오늘의 아기 소식</h3>
+  <p>아기가 오늘도 잘 지내고 있어요. 의료진이 확인한 소식을 부모에게 전달하는 상황을 가정한 예시입니다.</p>
+  <p class="muted">실제 의료진 확인이나 병원 연동은 이루어지지 않습니다.</p>
+ </div>
+ <div class="card">
+  <h3>🔔 스마트 팔찌 알림</h3>
+  <p class="muted">새 소식이 도착하면 팔찌의 빛과 진동으로 알림을 전달하는 기능을 구상했습니다.</p>
+ </div>
+</section>
+
+<section id="voice" class="hidden">
+ <h2>목소리 전달</h2>
+ <div class="card">
+  <div style="font-size:38px;text-align:center">🎙️</div>
+  <h3>아기에게 전하고 싶은 말</h3>
+  <p class="muted">메시지를 작성하고 전달 신청 과정을 체험해 보세요. 실제 전송은 되지 않습니다.</p>
+  <textarea id="message" placeholder="아기에게 들려주고 싶은 말을 적어 주세요."></textarea>
+  <button class="primary" onclick="sendMessage()">전달 신청 체험하기</button>
+ </div>
+</section>
+
+<section id="community" class="hidden">
+ <h2>부모 커뮤니티</h2>
+ <div class="card">
+  <h3>💬 서로의 마음을 나누는 공간</h3>
+  <textarea id="postText" placeholder="따뜻한 응원이나 이야기를 남겨 보세요."></textarea>
+  <button class="primary" onclick="addPost()">게시글 등록하기</button>
+ </div>
+ <div class="card" id="posts">
+  <div class="post"><b>처음 만나는 부모님들께</b><p>서로 응원하면서 힘이 되어 주어요!</p><span class="muted">익명 부모 · 좋아요 3</span></div>
+  <div class="post"><b>오늘도 힘내요</b><p>작은 소식 하나에도 큰 힘을 얻는 것 같아요.</p><span class="muted">익명 부모 · 좋아요 5</span></div>
+ </div>
+</section>
+
+<section id="info" class="hidden">
+ <h2>정보 안내</h2>
+ <div class="card">
+  <h3>🏥 병원과 함께하는 서비스</h3>
+  <p class="muted">커넥터 링은 신생아 중환자실과 부모를 연결하는 소통 지원 서비스를 목표로 합니다.</p>
+ </div>
+ <div class="card">
+  <h3>📖 육아 및 건강 정보</h3>
+  <p class="muted">아기 돌봄과 관련한 정보를 확인하고 부모가 필요한 내용을 쉽게 찾아볼 수 있도록 구성할 예정입니다.</p>
+ </div>
+ <div class="card">
+  <h3>🤝 제휴 안내</h3>
+  <p class="muted">병원과의 제휴를 통해 서비스를 운영하는 사업 모델을 구상하고 있습니다.</p>
+ </div>
+</section>
+<footer>CONNECTOR RING · 확 줄어드는 거리감<br>본 사이트는 서비스 시연용 프로토타입입니다.</footer>
+</main>
+
+<nav>
+ <button class="active" onclick="showTab('home',this)"><span>🏠</span>홈</button>
+ <button onclick="showTab('news',this)"><span>💌</span>아기 소식</button>
+ <button onclick="showTab('voice',this)"><span>🎙️</span>목소리</button>
+ <button onclick="showTab('community',this)"><span>💬</span>커뮤니티</button>
+ <button onclick="showTab('info',this)"><span>🏥</span>정보</button>
+</nav>
+
+<script>
+function showTab(id,btn){
+ document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ window.scrollTo(0,0);
+}
+function sendMessage(){
+ const msg=document.getElementById('message').value.trim();
+ if(!msg){alert('먼저 메시지를 작성해 주세요.');return;}
+ alert('전달 신청 체험이 완료되었습니다. 실제 병원이나 아기에게 전송되지는 않습니다.');
+ document.getElementById('message').value='';
+}
+function addPost(){
+ const box=document.getElementById('postText');
+ const msg=box.value.trim();
+ if(!msg){alert('게시글 내용을 입력해 주세요.');return;}
+ const post=document.createElement('div');
+ post.className='post';
+ const title=document.createElement('b');
+ title.textContent='새 게시글';
+ const p=document.createElement('p');
+ p.textContent=msg;
+ const small=document.createElement('span');
+ small.className='muted';
+ small.textContent='익명 부모 · 방금 전';
+ post.append(title,p,small);
+ document.getElementById('posts').prepend(post);
+ box.value='';
+}
+document.getElementById('videoFile').addEventListener('change',function(){
+ const file=this.files[0];
+ if(!file)return;
+ const video=document.getElementById('preview');
+ video.src=URL.createObjectURL(file);
+ video.classList.remove('hidden');
+});
+</script>
+</body>
+</html>
